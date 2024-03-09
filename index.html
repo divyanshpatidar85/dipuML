@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q&A Page</title>
+</head>
+<body>
+
+<!-- Display Questions and Answers -->
+<div id="qa-container"></div>
+
+<script>
+// Function to load JSON data from a file
+function loadJSON(callback) {
+    var xobj = new XMLHttpRequest();
+    xobj.overrideMimeType("application/json");
+    xobj.open('GET', 'jasonwowmakemehappy.json', true);
+    xobj.onreadystatechange = function () {
+        if (xobj.readyState == 4 && xobj.status == "200") {
+            callback(JSON.parse(xobj.responseText));
+        }
+    };
+    xobj.send(null);
+}
+
+// Function to display questions and answers
+function displayQAndA(data) {
+    const qaContainer = document.getElementById("qa-container");
+
+    data.forEach(item => {
+        const qaDiv = document.createElement("div");
+        qaDiv.innerHTML = `<h2>${item.question}</h2><p><strong>Answer:</strong> ${item.answer}</p>`;
+        qaContainer.appendChild(qaDiv);
+    });
+}
+
+// Load JSON data and display Q&A
+loadJSON(function(response) {
+    displayQAndA(response);
+});
+</script>
+
+</body>
+</html>
