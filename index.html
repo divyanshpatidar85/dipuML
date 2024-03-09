@@ -30,7 +30,8 @@ function displayQAndA(data) {
 
     data.forEach(item => {
         const qaDiv = document.createElement("div");
-        qaDiv.innerHTML = `<h2>${item.question}</h2><p><strong>Answer:</strong> ${item.answer}</p>`;
+        const heading = item.heading ? `<h2>${item.heading}</h2>` : '';
+        qaDiv.innerHTML = `${heading}<p><strong>Question:</strong> ${item.question}</p><p><strong>Answer:</strong> ${item.answer}</p>`;
         qaContainer.appendChild(qaDiv);
     });
 }
